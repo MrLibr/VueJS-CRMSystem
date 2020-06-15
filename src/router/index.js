@@ -8,15 +8,50 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    meta: {
+      layout: 'main',
+    },
     component: Home,
   },
   {
-    path: '/login',
-    name: 'Login',
+    path: '/profile',
+    name: 'Profile',
     meta: {
-      layout: 'empty',
+      layout: 'main',
     },
-    component: () => import('../views/Login.vue'),
+    component: () => import('../views/Profile.vue'),
+  },
+  {
+    path: '/record',
+    name: 'Record',
+    meta: {
+      layout: 'main',
+    },
+    component: () => import('../views/Record.vue'),
+  },
+  {
+    path: '/detail-record',
+    name: 'Detail-record',
+    meta: {
+      layout: 'main',
+    },
+    component: () => import('../views/Detail-record.vue'),
+  },
+  {
+    path: '/planning',
+    name: 'Planning',
+    meta: {
+      layout: 'main',
+    },
+    component: () => import('../views/Planning.vue'),
+  },
+  {
+    path: '/history',
+    name: 'History',
+    meta: {
+      layout: 'main',
+    },
+    component: () => import('../views/History.vue'),
   },
   {
     path: '/categories',
@@ -25,6 +60,22 @@ const routes = [
       layout: 'main',
     },
     component: () => import('../views/Categories.vue'),
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    meta: {
+      layout: 'empty',
+    },
+    component: () => import('../views/Register.vue'),
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    meta: {
+      layout: 'empty',
+    },
+    component: () => import('../views/Login.vue'),
   },
 ];
 
