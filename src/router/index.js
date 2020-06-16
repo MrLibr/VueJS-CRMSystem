@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
 
@@ -11,7 +10,7 @@ const routes = [
     meta: {
       layout: 'main',
     },
-    component: Home,
+    component: () => import('../views/Home.vue'),
   },
   {
     path: '/profile',
@@ -30,12 +29,12 @@ const routes = [
     component: () => import('../views/Record.vue'),
   },
   {
-    path: '/detail-record',
-    name: 'Detail-record',
+    path: '/detail',
+    name: 'Detail',
     meta: {
       layout: 'main',
     },
-    component: () => import('../views/Detail-record.vue'),
+    component: () => import('../views/Detail.vue'),
   },
   {
     path: '/planning',
