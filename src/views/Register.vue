@@ -1,32 +1,76 @@
 <template>
-  <form class="card auth-card">
+  <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
       <span class="card-title">Домашняя бухгалтерия</span>
       <div class="input-field">
         <input
             id="email"
             type="text"
+            v-model.trim="email"
+            :class="{invalid: ($v.email.$dirty && !$v.email.required) ||
+            ($v.email.$dirty && !$v.email.email)}"
         >
         <label for="email">Email</label>
-        <small class="helper-text invalid">Email</small>
+        <small
+            class="helper-text invalid"
+            v-if="$v.email.$dirty && !$v.email.required"
+        >
+          Your Email is Empty
+        </small>
+        <small
+            class="helper-text invalid"
+            v-else-if="$v.email.$dirty && !$v.email.email"
+        >
+          Your Email doesn't match requirements
+        </small>
       </div>
       <div class="input-field">
         <input
             id="password"
             type="password"
-            class="validate"
+            v-model.trim="password"
+            :class="{invalid: ($v.password.$dirty && !$v.password.required) ||
+            ($v.password.$dirty && !$v.password.minLength)}"
         >
         <label for="password">Пароль</label>
-        <small class="helper-text invalid">Password</small>
+        <small
+            class="helper-text invalid"
+            v-if="$v.password.$dirty && !$v.password.required"
+        >
+          Your Password is Empty
+        </small>
+        <small
+            class="helper-text invalid"
+            v-else-if="$v.password.$dirty && !$v.password.minLength"
+        >
+          Your Password doesn't match requirements.
+          Minimal Length {{$v.password.$params.minLength.min}} Symbols.
+          Now this {{password.length}} Symbols.
+        </small>
       </div>
       <div class="input-field">
         <input
             id="name"
             type="text"
-            class="validate"
+            v-model.trim="name"
+            :class="{invalid: ($v.name.$dirty && $v.name.required) ||
+            ($v.name.$dirty && !$v.name.minLength)}"
         >
         <label for="name">Имя</label>
-        <small class="helper-text invalid">Name</small>
+        <small
+            class="helper-text invalid"
+            v-if="$v.name.$dirty && !$v.name.required"
+        >
+          Your Name is Empty
+        </small>
+        <small
+            class="helper-text invalid"
+            v-else-if="$v.name.$dirty && !$v.name.minLength"
+        >
+          Your Name doesn't match requirements.
+          Minimal Length {{$v.name.$params.minLength.min}} Symbols.
+          Now this {{name.length}} Symbols.
+        </small>
       </div>
       <p>
         <label>
@@ -48,8 +92,45 @@
 
       <p class="center">
         Уже есть аккаунт?
-        <a href="/">Войти!</a>
+        <router-link to="/login">Войти!</router-link>
       </p>
     </div>
   </form>
 </template>
+
+<script>
+import { email, required, minLength } from 'vuelidate/lib/validators';
+
+export default {
+  name: 'register',
+  data: () => ({
+    email: '',
+    password: '',
+    name: '',
+    rules: false,
+  }),
+  validations: {
+    email: { email, required },
+    password: { minLength: minLength(4), required },
+    name: { minLength: minLength(3), required },
+    rules: { checked: (value) => value },
+  },
+  methods: {
+    submitHandler() {
+      if (this.$v.$invalid) {
+        this.$v.$touch();
+        return;
+      }
+
+      // eslint-disable-next-line no-unused-vars
+      const formData = {
+        email: this.email,
+        password: this.password,
+        name: this.name,
+      };
+
+      this.$router.push('/login');
+    },
+  },
+};
+</script>
