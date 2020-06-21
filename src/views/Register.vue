@@ -53,28 +53,19 @@
             id="name"
             type="text"
             v-model.trim="name"
-            :class="{invalid: ($v.name.$dirty && $v.name.required) ||
-            ($v.name.$dirty && !$v.name.minLength)}"
+            :class="{invalid: $v.name.$dirty && !$v.name.required}"
         >
         <label for="name">Имя</label>
         <small
             class="helper-text invalid"
             v-if="$v.name.$dirty && !$v.name.required"
         >
-          Your Name is Empty
-        </small>
-        <small
-            class="helper-text invalid"
-            v-else-if="$v.name.$dirty && !$v.name.minLength"
-        >
-          Your Name doesn't match requirements.
-          Minimal Length {{$v.name.$params.minLength.min}} Symbols.
-          Now this {{name.length}} Symbols.
+          Write Your Name
         </small>
       </div>
       <p>
         <label>
-          <input type="checkbox"/>
+          <input type="checkbox" v-model="rules"/>
           <span>С правилами согласен</span>
         </label>
       </p>
@@ -110,26 +101,30 @@ export default {
     rules: false,
   }),
   validations: {
-    email: { email, required },
-    password: { minLength: minLength(4), required },
-    name: { minLength: minLength(3), required },
-    rules: { checked: (value) => value },
+    email: { required, email },
+    password: { required, minLength: minLength(6) },
+    name: { required, minLength: minLength(3) },
+    rules: { checked: (v) => v },
   },
   methods: {
-    submitHandler() {
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
 
-      // eslint-disable-next-line no-unused-vars
       const formData = {
         email: this.email,
         password: this.password,
         name: this.name,
       };
 
-      this.$router.push('/login');
+      try {
+        await this.$store.dispatch('register', formData);
+        await this.$router.push('/login');
+      } catch (e) {
+        throw new Error();
+      }
     },
   },
 };

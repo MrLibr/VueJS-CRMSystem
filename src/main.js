@@ -22,14 +22,14 @@ Vue.use(messagePlugin);
 Vue.filter('dateFilter', dateFilter);
 
 firebase.initializeApp({
-  apiKey: 'AIzaSyDIkGBvr8vhvZ3kSfuQ6Xzt7w1e58YvIps',
-  authDomain: 'project-crm-system.firebaseapp.com',
-  databaseURL: 'https://project-crm-system.firebaseio.com',
-  projectId: 'project-crm-system',
-  storageBucket: 'project-crm-system.appspot.com',
-  messagingSenderId: '1022166561830',
-  appId: '1:1022166561830:web:d31120f8f97e99e4aee2e7',
-  measurementId: 'G-141P3RRDCD',
+  apiKey: 'AIzaSyDuOD2G2l-JKQd7YXlGIG0ipAc1vdzIkig',
+  authDomain: 'crm-system-on-vue.firebaseapp.com',
+  databaseURL: 'https://crm-system-on-vue.firebaseio.com',
+  projectId: 'crm-system-on-vue',
+  storageBucket: 'crm-system-on-vue.appspot.com',
+  messagingSenderId: '1017182407649',
+  appId: '1:1017182407649:web:2bd9f42ab45c35267da0a0',
+  measurementId: 'G-74PW250RHR',
 });
 
 let app;
