@@ -80,7 +80,7 @@ export default {
   }),
   validations: {
     email: { email, required },
-    password: { minLength: minLength(4), required },
+    password: { minLength: minLength(6), required },
   },
   mounted() {
     if (messages[this.$route.query.message]) {
@@ -88,19 +88,23 @@ export default {
     }
   },
   methods: {
-    submitHandler() {
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
 
-      // eslint-disable-next-line no-unused-vars
       const formData = {
         email: this.email,
         password: this.password,
       };
 
-      this.$router.push('/');
+      try {
+        await this.$store.dispatch('login', formData);
+        await this.$router.push('/');
+      } catch (error) {
+        await this.$router.push('/login');
+      }
     },
   },
 };
