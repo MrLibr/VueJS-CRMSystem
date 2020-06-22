@@ -28,8 +28,9 @@ export default {
       const { currentUser } = firebase.auth();
       return currentUser ? currentUser.uid : null;
     },
-    async logout() {
+    async logout({ commit }) {
       await firebase.auth().signOut();
+      commit('clearInfo');
     },
   },
 };
