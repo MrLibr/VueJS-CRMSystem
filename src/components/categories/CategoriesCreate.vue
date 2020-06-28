@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Создать</h4>
+        <h4>Create</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
@@ -13,7 +13,7 @@
               v-model="title"
               :class="{invalid: $v.title.$dirty && !$v.title.required}"
           >
-          <label for="name">Название</label>
+          <label for="name">Name Your Category</label>
           <span
               class="helper-text invalid"
               v-if="$v.title.$dirty && !$v.title.required"
@@ -30,7 +30,7 @@
               :class="{invalid: ($v.limit.$dirty && !$v.limit.required) &&
               ($v.limit.$dirty && !$v.limit.minValue)}"
           >
-          <label for="limit">Лимит</label>
+          <label for="limit">Limit</label>
           <span
               class="helper-text invalid"
               v-if="($v.limit.$dirty && !$v.limit.required) &&
@@ -41,7 +41,7 @@
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Создать
+          Create
           <i class="material-icons right">send</i>
         </button>
       </form>

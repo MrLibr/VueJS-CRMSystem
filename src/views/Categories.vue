@@ -1,13 +1,21 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Категории</h3>
+      <h3>Categories</h3>
     </div>
     <section>
-      <div class="row">
+      <Loader v-if="loading"/>
+
+      <div class="row" v-else>
         <CategoriesCreate @created="addNewCategory"/>
 
-        <CategoriesEdit/>
+        <CategoriesEdit
+            v-if="categories.length"
+            :categories="categories"
+            :key="categories.length + updateCount"
+            @updated="updateCategories"
+        />
+        <p class="center" v-else>You haven't no one Category</p>
       </div>
     </section>
   </div>
@@ -21,11 +29,22 @@ export default {
   name: 'Categories',
   data: () => ({
     categories: [],
+    updateCount: 0,
+    loading: true,
   }),
+  async mounted() {
+    this.categories = await this.$store.dispatch('fetchCategories');
+    this.loading = false;
+  },
   methods: {
     addNewCategory(category) {
       this.categories.push(category);
-      console.log(this.categories);
+    },
+    updateCategories(category) {
+      const index = this.categories.findIndex((categoryArray) => categoryArray.id === category.id);
+      this.categories[index].title = category.title;
+      this.categories[index].limit = category.limit;
+      this.updateCount += 1;
     },
   },
   components: {

@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
+      <span class="card-title">Home Accounting</span>
       <div class="input-field">
         <input
             id="email"
@@ -32,7 +32,7 @@
             :class="{invalid: ($v.password.$dirty && !$v.password.required) ||
             ($v.password.$dirty && !$v.password.minLength)}"
         >
-        <label for="password">Пароль</label>
+        <label for="password">Password</label>
         <small
             class="helper-text invalid"
             v-if="$v.password.$dirty && !$v.password.required"
@@ -55,7 +55,7 @@
             v-model.trim="name"
             :class="{invalid: $v.name.$dirty && !$v.name.required}"
         >
-        <label for="name">Имя</label>
+        <label for="name">Your Name</label>
         <small
             class="helper-text invalid"
             v-if="$v.name.$dirty && !$v.name.required"
@@ -66,7 +66,7 @@
       <p>
         <label>
           <input type="checkbox" v-model="rules"/>
-          <span>С правилами согласен</span>
+          <span>I agree</span>
         </label>
       </p>
     </div>
@@ -76,14 +76,14 @@
             class="btn waves-effect waves-light auth-submit"
             type="submit"
         >
-          Зарегистрироваться
+          Registration
           <i class="material-icons right">send</i>
         </button>
       </div>
 
       <p class="center">
-        Уже есть аккаунт?
-        <router-link to="/login">Войти!</router-link>
+        Are You Have Account?
+        <router-link to="/login">Log In</router-link>
       </p>
     </div>
   </form>
