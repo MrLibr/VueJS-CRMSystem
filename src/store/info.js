@@ -19,10 +19,22 @@ export default {
     async fetchInfo({ dispatch, commit }) {
       try {
         const currentId = await dispatch('getId');
-        const info = (await firebase.database().ref(`users/${currentId}/info`).once('value')).val();
+        const info = (await firebase.database().ref(`/users/${currentId}/info`).once('value')).val();
         commit('setInfo', info);
       } catch (error) {
-        throw new Error();
+        commit('setError', error);
+        throw error;
+      }
+    },
+    async updateInfo({ dispatch, commit, getters }, toUpdate) {
+      try {
+        const currentId = await dispatch('getId');
+        const updateData = { ...getters.info, ...toUpdate };
+        await firebase.database().ref(`/users/${currentId}/info`).update(updateData);
+        commit('setInfo', updateData);
+      } catch (error) {
+        commit('setError', error);
+        throw error;
       }
     },
   },
