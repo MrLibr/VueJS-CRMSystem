@@ -1,4 +1,4 @@
 export default {
-  // eslint-disable-next-line quote-props
-  'logout': 'You out of this System',
+  logout: 'You out of this System',
+  login: 'You need LogIn This System',
 };
