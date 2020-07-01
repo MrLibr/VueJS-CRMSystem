@@ -34,7 +34,7 @@ export default {
     ...mapGetters(['info']),
   },
   async mounted() {
-    const records = await this.$store.dispatch('fetchRecord');
+    const records = await this.$store.dispatch('fetchRecords');
     const categories = await this.$store.dispatch('fetchCategories');
 
     this.categories = categories.map((category) => {

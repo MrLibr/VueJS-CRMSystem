@@ -11,11 +11,21 @@ export default {
         throw error;
       }
     },
-    async fetchRecord({ dispatch, commit }) {
+    async fetchRecords({ dispatch, commit }) {
       try {
         const currentId = await dispatch('getId');
-        const records = (await firebase.database().ref(`users/${currentId}/records`).once('value')).val() || {};
+        const records = (await firebase.database().ref(`/users/${currentId}/records`).once('value')).val() || {};
         return Object.keys(records).map((key) => ({ ...records[key], id: key }));
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      }
+    },
+    async fetchRecordById({ dispatch, commit }, id) {
+      try {
+        const currentId = await dispatch('getId');
+        const record = (await firebase.database().ref(`users/${currentId}/records`).child(id).once('value')).val() || {};
+        return { ...record, id };
       } catch (error) {
         commit('setError', error);
         throw error;

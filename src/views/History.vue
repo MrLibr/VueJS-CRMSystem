@@ -32,9 +32,8 @@ export default {
     categories: [],
   }),
   async mounted() {
-    // this.records = await this.$store.dispatch('fetchRecord');
     this.categories = await this.$store.dispatch('fetchCategories');
-    const records = await this.$store.dispatch('fetchRecord');
+    const records = await this.$store.dispatch('fetchRecords');
     this.records = records.map((record) => ({
       ...record,
       categoryName: this.categories.find((category) => record.categoryId === category.id).title,
