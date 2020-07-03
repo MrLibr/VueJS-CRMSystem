@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
+import Paginate from 'vuejs-paginate';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -23,9 +24,13 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
+
 Vue.component('Loader', Loader);
+Vue.component('Paginate', Paginate);
+
 Vue.filter('dateFilter', dateFilter);
 Vue.filter('currencyFilter', currencyFilter);
+
 Vue.directive('tooltipDirective', tooltipDirective);
 
 firebase.initializeApp({

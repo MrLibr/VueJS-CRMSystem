@@ -16,30 +16,41 @@
     </p>
 
     <section v-else>
-      <HistoryTable :records="records"/>
+      <HistoryTable :records="items"/>
+      <Paginate
+          class="center"
+          v-model="pageCurrent"
+          :page-count="pageCount"
+          :click-handler="pageChangeHandler"
+          :prev-text="'Prev'"
+          :next-text="'Next'"
+          :container-class="'pagination'"
+          :page-class="'waves-effect'"
+      />
     </section>
   </div>
 </template>
 
 <script>
 import HistoryTable from '../components/history/HistoryTable.vue';
+import paginationMixin from '../mixins/pagination.mixin';
 
 export default {
   name: 'History',
+  mixins: [paginationMixin],
   data: () => ({
     loading: true,
     records: [],
-    categories: [],
   }),
   async mounted() {
-    this.categories = await this.$store.dispatch('fetchCategories');
-    const records = await this.$store.dispatch('fetchRecords');
-    this.records = records.map((record) => ({
+    const categories = await this.$store.dispatch('fetchCategories');
+    this.records = await this.$store.dispatch('fetchRecords');
+    this.setupPagination(this.records.map((record) => ({
       ...record,
-      categoryName: this.categories.find((category) => record.categoryId === category.id).title,
+      categoryName: categories.find((category) => record.categoryId === category.id).title,
       typeClass: record.type === 'income' ? 'green' : 'red',
       typeText: record.type === 'income' ? 'Income' : 'Outcome',
-    }));
+    })));
 
     this.loading = false;
   },
