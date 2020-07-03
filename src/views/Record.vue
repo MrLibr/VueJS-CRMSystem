@@ -153,14 +153,20 @@ export default {
 
           await this.$store.dispatch('createRecord', formRecord);
 
+          debugger;
+
           const bill = this.type === 'income'
             ? this.info.bill + this.amount
             : this.info.bill - this.amount;
 
+          debugger;
+
           await this.$store.dispatch('updateInfo', { bill });
 
+          debugger;
+
           this.$message('This Record Created Success');
-          this.$v.reset();
+          this.$v.$reset();
           this.amount = 1;
           this.description = '';
         } catch (error) {
