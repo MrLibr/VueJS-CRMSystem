@@ -46,6 +46,11 @@ import localizeFilter from '../filters/localize.filter';
 
 export default {
   name: 'History',
+  metaInfo() {
+    return {
+      title: this.$title('HistoryNavMenu'),
+    };
+  },
   extends: {
     Pie,
     PolarArea,
@@ -71,7 +76,6 @@ export default {
         categoryName: categories.find((category) => record.categoryId === category.id).title,
         typeText: record.type === 'income' ? localizeFilter('Income') : localizeFilter('Outcome'),
         typeClass: record.type === 'income' ? 'green' : 'red',
-        messageOnButton: localizeFilter('RecordLook'),
       })));
       const chartOutcomeCharacters = {
         type: 'pie',

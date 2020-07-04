@@ -77,7 +77,7 @@
             v-model="description"
             :class="{invalid: $v.description.$dirty && !$v.description.required}"
         >
-        <label for="description">{{'RecordDescription' | localizeFilter}}</label>
+        <label for="description">{{'Description' | localizeFilter}}</label>
         <span
             class="helper-text invalid"
             v-if="$v.description.$dirty && !$v.description.required"
@@ -102,6 +102,11 @@ import localizeFilter from '../filters/localize.filter';
 
 export default {
   name: 'Record',
+  metaInfo() {
+    return {
+      title: this.$title('RecordNavMenu'),
+    };
+  },
   data: () => ({
     loading: true,
     select: null,

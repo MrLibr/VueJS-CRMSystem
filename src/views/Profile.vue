@@ -45,7 +45,12 @@ import { mapGetters } from 'vuex';
 import { required, minLength } from 'vuelidate/lib/validators';
 
 export default {
-  name: 'profile',
+  name: 'Profile',
+  metaInfo() {
+    return {
+      title: this.$title('ProfileTitle'),
+    };
+  },
   data: () => ({
     name: '',
     isEnLocale: true,

@@ -1,8 +1,11 @@
 import M from 'materialize-css';
+import localizeFilter from '../filters/localize.filter';
 
 export default {
-  bind(element, { value }) {
-    M.Tooltip.init(element, { html: value });
+  bind(el, { value, modifiers }) {
+    M.Tooltip.init(el, {
+      html: modifiers.nolocales ? value : localizeFilter(value),
+    });
   },
   unbind(element) {
     const tooltip = M.Tooltip.getInstance(element);

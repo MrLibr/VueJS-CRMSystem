@@ -9,7 +9,7 @@
         <strong>{{category.title}}:</strong>
         {{category.spend | currencyFilter('USD')}} of {{category.limit | currencyFilter('USD')}}
       </p>
-      <div class="progress" v-tooltipDirective="category.tooltipString">
+      <div class="progress" v-tooltipDirective.nolocales="category.tooltipString">
         <div
             class="determinate"
             :class="[category.progressColor]"

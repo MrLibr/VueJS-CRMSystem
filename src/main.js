@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
 import Paginate from 'vuejs-paginate';
+import VueMeta from 'vue-meta';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -13,6 +14,7 @@ import store from './store';
 import Loader from './components/app/Loader.vue';
 
 import messagePlugin from './utils/materialize.message.plugin';
+import titlePlugin from './utils/title.plugin';
 import dateFilter from './filters/date.filter';
 import currencyFilter from './filters/currency.filter';
 import localizeFilter from './filters/localize.filter';
@@ -25,6 +27,8 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
+Vue.use(titlePlugin);
+Vue.use(VueMeta);
 
 Vue.component('Loader', Loader);
 Vue.component('Paginate', Paginate);

@@ -30,6 +30,11 @@ import CategoriesEdit from '../components/categories/CategoriesEdit.vue';
 
 export default {
   name: 'Categories',
+  metaInfo() {
+    return {
+      title: this.$title('CategoriesNavMenu'),
+    };
+  },
   data: () => ({
     categories: [],
     updateCount: 0,

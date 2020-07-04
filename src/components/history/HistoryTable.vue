@@ -30,7 +30,7 @@
         <button
             class="btn-small btn"
             @click.prevent="$router.push(`/detail/${record.id}`)"
-            v-tooltipDirective="record.messageOnButton"
+            v-tooltipDirective="'RecordLook'"
         >
           <i class="material-icons">open_in_new</i>
         </button>

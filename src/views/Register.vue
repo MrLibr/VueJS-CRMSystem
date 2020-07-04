@@ -94,7 +94,12 @@
 import { email, required, minLength } from 'vuelidate/lib/validators';
 
 export default {
-  name: 'register',
+  name: 'Register',
+  metaInfo() {
+    return {
+      title: this.$title('ButtonRegistration'),
+    };
+  },
   data: () => ({
     email: '',
     password: '',

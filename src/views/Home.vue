@@ -6,7 +6,7 @@
       <button
           class="btn waves-effect waves-light btn-small"
           @click.prevent="refresh"
-          v-tooltipDirective="message"
+          v-tooltipDirective="'ButtonRefresh'"
       >
         <i class="material-icons">refresh</i>
       </button>
@@ -30,14 +30,17 @@
 <script>
 import HomeBill from '../components/home/HomeBill.vue';
 import HomeCurrency from '../components/home/HomeCurrency.vue';
-import localizeFilter from '../filters/localize.filter';
 
 export default {
   name: 'Home',
+  metaInfo() {
+    return {
+      title: this.$title('BillsNavMenu'),
+    };
+  },
   data: () => ({
     loading: true,
     currency: null,
-    message: localizeFilter('ButtonRefresh'),
   }),
   async mounted() {
     this.currency = await this.$store.dispatch('fetchCurrency');

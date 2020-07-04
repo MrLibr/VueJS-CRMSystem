@@ -20,7 +20,7 @@
         <router-link
             class="btn-floating btn-large blue"
             to="/record"
-            v-tooltipDirective="messageTooltip">
+            v-tooltipDirective="'CreateNewRecord'">
           <i class="large material-icons">add</i>
         </router-link>
       </div>
@@ -39,14 +39,11 @@ export default {
   data: () => ({
     isOpen: true,
     loading: true,
-    messageTooltip: '',
   }),
   async mounted() {
     if (!Object.keys(this.$store.getters.info).length) {
       await this.$store.dispatch('fetchInfo');
     }
-
-    this.messageTooltip = localizeFilter('CreateNewRecord');
     this.loading = false;
   },
   computed: {

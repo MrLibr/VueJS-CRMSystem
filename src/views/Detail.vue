@@ -33,6 +33,11 @@ import localizeFilter from '../filters/localize.filter';
 
 export default {
   name: 'Detail',
+  metaInfo() {
+    return {
+      title: this.$title('DetailNavMenu'),
+    };
+  },
   data: () => ({
     record: null,
     loading: true,
