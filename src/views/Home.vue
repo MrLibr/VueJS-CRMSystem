@@ -1,9 +1,13 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Bills</h3>
+      <h3>{{'HomeBillsTitle' | localizeFilter}}</h3>
 
-      <button class="btn waves-effect waves-light btn-small" @click.prevent="refresh">
+      <button
+          class="btn waves-effect waves-light btn-small"
+          @click.prevent="refresh"
+          v-tooltipDirective="message"
+      >
         <i class="material-icons">refresh</i>
       </button>
     </div>
@@ -26,12 +30,14 @@
 <script>
 import HomeBill from '../components/home/HomeBill.vue';
 import HomeCurrency from '../components/home/HomeCurrency.vue';
+import localizeFilter from '../filters/localize.filter';
 
 export default {
   name: 'Home',
   data: () => ({
     loading: true,
     currency: null,
+    message: localizeFilter('ButtonRefresh'),
   }),
   async mounted() {
     this.currency = await this.$store.dispatch('fetchCurrency');

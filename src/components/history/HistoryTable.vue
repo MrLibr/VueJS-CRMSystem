@@ -2,12 +2,12 @@
   <table>
     <thead>
     <tr>
-      <th>Index</th>
-      <th>Sum</th>
-      <th>Date</th>
-      <th>Category</th>
-      <th>Type Of</th>
-      <th>Open</th>
+      <th>{{'Index' | localizeFilter}}</th>
+      <th>{{'RecordSum' | localizeFilter}}</th>
+      <th>{{'Date' | localizeFilter}}</th>
+      <th>{{'RecordInCategory' | localizeFilter}}</th>
+      <th>{{'Type' | localizeFilter}}</th>
+      <th>{{'ButtonOpen' | localizeFilter}}</th>
     </tr>
     </thead>
 
@@ -30,8 +30,7 @@
         <button
             class="btn-small btn"
             @click.prevent="$router.push(`/detail/${record.id}`)"
-            v-tooltipDirective="'Looking Record'"
-
+            v-tooltipDirective="record.messageOnButton"
         >
           <i class="material-icons">open_in_new</i>
         </button>
@@ -42,6 +41,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'HistoryTable',
   props: {

@@ -3,14 +3,14 @@
     <div class="card orange darken-3 bill-card">
       <div class="card-content white-text">
         <div class="card-header">
-          <span class="card-title">Current</span>
+          <span class="card-title">{{'Current' | localizeFilter}}</span>
         </div>
         <table>
           <thead>
           <tr>
-            <th>Current</th>
-            <th>Value</th>
-            <th>Date</th>
+            <th>{{'Current' | localizeFilter}}</th>
+            <th>{{'Value' | localizeFilter}}</th>
+            <th>{{'Date' | localizeFilter}}</th>
           </tr>
           </thead>
 
@@ -39,7 +39,3 @@ export default {
   }),
 };
 </script>
-
-<style scoped>
-
-</style>

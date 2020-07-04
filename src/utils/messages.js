@@ -1,4 +1,6 @@
+import localizeFilter from '../filters/localize.filter';
+
 export default {
-  logout: 'You out of this System',
-  login: 'You need LogIn This System',
+  logout: localizeFilter('Logout'),
+  login: localizeFilter('LogInWarning'),
 };

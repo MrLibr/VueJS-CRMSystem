@@ -2,7 +2,7 @@
   <div class="col s12 m6 l4">
     <div class="card light-blue bill-card">
       <div class="card-content white-text">
-        <span class="card-title">Bills in Any Current</span>
+        <span class="card-title">{{'HomeCurrency' | localizeFilter}}</span>
 
         <p
             v-for="currency of currencies"
@@ -34,7 +34,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>

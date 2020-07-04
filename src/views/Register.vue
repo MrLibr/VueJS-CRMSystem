@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title">Home Accounting</span>
+      <span class="card-title">{{'HomeAccountingTitle' | localizeFilter}}</span>
       <div class="input-field">
         <input
             id="email"
@@ -10,18 +10,18 @@
             :class="{invalid: ($v.email.$dirty && !$v.email.required) ||
             ($v.email.$dirty && !$v.email.email)}"
         >
-        <label for="email">Email</label>
+        <label for="email">{{'Email' | localizeFilter}}</label>
         <small
             class="helper-text invalid"
             v-if="$v.email.$dirty && !$v.email.required"
         >
-          Your Email is Empty
+          {{'EmailWarningEmpty' | localizeFilter}}
         </small>
         <small
             class="helper-text invalid"
             v-else-if="$v.email.$dirty && !$v.email.email"
         >
-          Your Email doesn't match requirements
+          {{'EmailWarningRequirement' | localizeFilter}}
         </small>
       </div>
       <div class="input-field">
@@ -32,20 +32,21 @@
             :class="{invalid: ($v.password.$dirty && !$v.password.required) ||
             ($v.password.$dirty && !$v.password.minLength)}"
         >
-        <label for="password">Password</label>
+        <label for="password">{{'Password' | localizeFilter}}</label>
         <small
             class="helper-text invalid"
             v-if="$v.password.$dirty && !$v.password.required"
         >
-          Your Password is Empty
+          {{'PasswordWarningEmpty' | localizeFilter}}
         </small>
         <small
             class="helper-text invalid"
             v-else-if="$v.password.$dirty && !$v.password.minLength"
         >
-          Your Password doesn't match requirements.
-          Minimal Length {{$v.password.$params.minLength.min}} Symbols.
-          Now this {{password.length}} Symbols.
+          {{'PasswordWarningRequirementStart' | localizeFilter}}
+          {{$v.password.$params.minLength.min}}
+          {{'PasswordWarningRequirementEnd' | localizeFilter}}
+          {{password.length}}
         </small>
       </div>
       <div class="input-field">
@@ -55,18 +56,18 @@
             v-model.trim="name"
             :class="{invalid: $v.name.$dirty && !$v.name.required}"
         >
-        <label for="name">Your Name</label>
+        <label for="name">{{'Name' | localizeFilter}}</label>
         <small
             class="helper-text invalid"
             v-if="$v.name.$dirty && !$v.name.required"
         >
-          Write Your Name
+          {{'NameWarning' | localizeFilter}}
         </small>
       </div>
       <p>
         <label>
           <input type="checkbox" v-model="rules"/>
-          <span>I agree</span>
+          <span>{{'AnswerForRules' | localizeFilter}}</span>
         </label>
       </p>
     </div>
@@ -76,14 +77,14 @@
             class="btn waves-effect waves-light auth-submit"
             type="submit"
         >
-          Registration
+          {{'ButtonRegistration' | localizeFilter}}
           <i class="material-icons right">send</i>
         </button>
       </div>
 
       <p class="center">
-        Are You Have Account?
-        <router-link to="/login">Log In</router-link>
+        {{'LogInReference' | localizeFilter}}
+        <router-link to="/login">{{'LogIn' | localizeFilter}}</router-link>
       </p>
     </div>
   </form>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>My History Records</h3>
+      <h3>{{'HistoryRecords' | localizeFilter}}</h3>
     </div>
 
     <div class="history-chart">
@@ -18,8 +18,8 @@
     <Loader v-if="loading"/>
 
     <p class="center" v-else-if="!records.length">
-      You Don't Have No Once Record.
-      <router-link to="/record">Please, Create New Record</router-link>
+      {{'HistoryWarning' | localizeFilter}}
+      <router-link to="/record">{{'RequestToCreateNewRecord' | localizeFilter}}</router-link>
     </p>
 
     <section v-else>
@@ -29,8 +29,8 @@
           v-model="pageCurrent"
           :page-count="pageCount"
           :click-handler="pageChangeHandler"
-          :prev-text="'Prev'"
-          :next-text="'Next'"
+          :prev-text="paginationPrev"
+          :next-text="paginationNext"
           :container-class="'pagination'"
           :page-class="'waves-effect'"
       />
@@ -42,6 +42,7 @@
 import { Pie, PolarArea } from 'vue-chartjs';
 import HistoryTable from '../components/history/HistoryTable.vue';
 import paginationMixin from '../mixins/pagination.mixin';
+import localizeFilter from '../filters/localize.filter';
 
 export default {
   name: 'History',
@@ -52,6 +53,8 @@ export default {
   mixins: [paginationMixin],
   data: () => ({
     loading: true,
+    paginationPrev: localizeFilter('PaginationPrev'),
+    paginationNext: localizeFilter('PaginationNext'),
     records: [],
   }),
   async mounted() {
@@ -66,16 +69,16 @@ export default {
       this.setupPagination(this.records.map((record) => ({
         ...record,
         categoryName: categories.find((category) => record.categoryId === category.id).title,
+        typeText: record.type === 'income' ? localizeFilter('Income') : localizeFilter('Outcome'),
         typeClass: record.type === 'income' ? 'green' : 'red',
-        typeText: record.type === 'income' ? 'Income' : 'Outcome',
+        messageOnButton: localizeFilter('RecordLook'),
       })));
-
       const chartOutcomeCharacters = {
         type: 'pie',
         data: {
           labels: categories.map((category) => category.title),
           datasets: [{
-            label: 'Your Outcome by Category',
+            label: localizeFilter('OutcomeChartTitle'),
             data: categories.map((category) => this.records.reduce((total, record) => {
               if (record.categoryId === category.id && record.type === 'outcome') {
                 // eslint-disable-next-line no-param-reassign
@@ -108,7 +111,7 @@ export default {
             position: 'top',
             fontSize: 16,
             fontStyle: 'italic',
-            text: 'Outcome Chart',
+            text: localizeFilter('OutcomeChartLabel'),
           },
         },
       };
@@ -118,7 +121,7 @@ export default {
         data: {
           labels: categories.map((category) => category.title),
           datasets: [{
-            label: 'Your Income by Category',
+            label: localizeFilter('IncomeChartTitle'),
             data: categories.map((category) => this.records.reduce((total, record) => {
               if (record.categoryId === category.id && record.type === 'income') {
                 // eslint-disable-next-line no-param-reassign
@@ -127,20 +130,20 @@ export default {
               return total;
             }, 0)),
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
+              'rgba(172, 41, 69, 0.2)',
+              'rgba(9, 112, 173, 0.2)',
+              'rgba(239, 173, 0, 0.2)',
+              'rgba(26, 205, 205, 0.2)',
+              'rgba(107, 47, 226, 0.2)',
+              'rgba(194, 106, 11, 0.2)',
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
+              'rgb(172, 41, 69, 1)',
+              'rgb(9, 112, 173, 1)',
+              'rgb(239, 173, 0, 1)',
+              'rgb(26, 205, 205, 1)',
+              'rgb(107, 47, 226, 1)',
+              'rgb(194, 106, 11, 1)',
             ],
             borderWidth: 1,
           }],
@@ -151,7 +154,7 @@ export default {
             position: 'top',
             fontSize: 16,
             fontStyle: 'italic',
-            text: 'Income Chart',
+            text: localizeFilter('IncomeChartLabel'),
           },
         },
       };

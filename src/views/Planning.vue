@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Planning Your Money</h3>
+      <h3>{{'PlanningTitle' | localizeFilter}}</h3>
       <h4>{{info.bill | currencyFilter('USD')}}</h4>
     </div>
 
     <Loader v-if="loading"/>
 
     <p class="center" v-else-if="!categories.length">
-      You don't have no once categories.
-      Please, create categories on <router-link to="/categories">Categories</router-link>
+      {{'CategoriesWarning' | localizeFilter}}
+      <router-link to="/categories">{{'CategoriesTitle' | localizeFilter}}</router-link>
     </p>
 
     <section v-else>
@@ -22,6 +22,7 @@
 import { mapGetters } from 'vuex';
 import currencyFilter from '../filters/currency.filter';
 import PlanningCategory from '../components/planning/PlanningCategory.vue';
+import localizeFilter from '../filters/localize.filter';
 
 export default {
   name: 'Planning',
@@ -53,7 +54,9 @@ export default {
           : 'red';
 
       const tooltipValue = category.limit - spend;
-      const tooltipString = `${tooltipValue < 0 ? 'You Out of Limit: ' : 'You Have: '} ${currencyFilter(Math.abs(tooltipValue))}`;
+      const tooltipString = `${tooltipValue < 0
+        ? localizeFilter('PlanningWarningMessage')
+        : localizeFilter('PlanningSuccessMessage')} ${currencyFilter(Math.abs(tooltipValue))}`;
 
       return {
         ...category,

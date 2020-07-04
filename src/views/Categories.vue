@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Categories</h3>
+      <h3>{{'CategoriesTitle' | localizeFilter}}</h3>
     </div>
     <section>
       <Loader v-if="loading"/>
@@ -15,7 +15,10 @@
             :key="categories.length + updateCount"
             @updated="updateCategories"
         />
-        <p class="center" v-else>You haven't no one Category</p>
+        <p class="center" v-else>
+          {{'CategoriesWarning' | localizeFilter}}
+          <router-link to="/categories">{{'CategoriesTitle' | localizeFilter}}</router-link>
+        </p>
       </div>
     </section>
   </div>

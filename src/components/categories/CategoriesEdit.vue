@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Edit</h4>
+        <h4>{{'ButtonUpdate' | localizeFilter}}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
@@ -14,7 +14,7 @@
                 :value="category.id"
             >{{category.title}}</option>
           </select>
-          <label for="select">Select Category</label>
+          <label for="select">{{'CategoriesSelect' | localizeFilter}}</label>
         </div>
 
         <div class="input-field">
@@ -24,12 +24,12 @@
               v-model="title"
               :class="{invalid: $v.title.$dirty && !$v.title.required}"
           >
-          <label for="name">Name Your Category</label>
+          <label for="name">{{'CategoryName' | localizeFilter}}</label>
           <span
               class="helper-text invalid"
               v-if="$v.title.$dirty && !$v.title.required"
           >
-            Please, write new name for Categories
+            {{'CategoryWarning' | localizeFilter}}
           </span>
         </div>
 
@@ -41,18 +41,18 @@
               :class="{invalid: ($v.limit.$dirty && !$v.limit.required) &&
               ($v.limit.$dirty && !$v.limit.minValue)}"
           >
-          <label for="limit">Limit</label>
+          <label for="limit">{{'Limit' | localizeFilter}}</label>
           <span
               class="helper-text invalid"
               v-if="($v.limit.$dirty && !$v.limit.required) &&
               ($v.limit.$dirty && !$v.limit.minValue)"
           >
-            Minimal value need to {{$v.limit.$params.minValue.min}}
+            {{'MinimalSumWarning' | localizeFilter}} {{$v.limit.$params.minValue.min}}
           </span>
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Edit
+          {{'ButtonUpdate' | localizeFilter}}
           <i class="material-icons right">send</i>
         </button>
       </form>
@@ -63,6 +63,7 @@
 <script>
 import M from 'materialize-css';
 import { minValue, required } from 'vuelidate/lib/validators';
+import localizeFilter from '../../filters/localize.filter';
 
 export default {
   name: 'CategoriesEdit',
@@ -118,7 +119,7 @@ export default {
 
       try {
         await this.$store.dispatch('updateCategory', categoryDate);
-        this.$message('Category updated success');
+        this.$message(localizeFilter('CategoryUpdated'));
         this.$emit('updated', categoryDate);
       } catch (error) {
         throw new Error();
@@ -127,7 +128,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>

@@ -1,4 +1,5 @@
 import M from 'materialize-css';
+import localizeFilter from '../filters/localize.filter';
 
 export default {
   // eslint-disable-next-line no-unused-vars
@@ -9,7 +10,7 @@ export default {
     };
     // eslint-disable-next-line no-param-reassign
     Vue.prototype.$error = (message) => {
-      M.toast({ html: `[Error] ${message}` });
+      M.toast({ html: `${localizeFilter('Error')} ${message}` });
     };
   },
 };

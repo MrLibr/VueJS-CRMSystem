@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Create</h4>
+        <h4>{{'ButtonCreate' | localizeFilter}}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
@@ -13,12 +13,12 @@
               v-model="title"
               :class="{invalid: $v.title.$dirty && !$v.title.required}"
           >
-          <label for="name">Name Your Category</label>
+          <label for="name">{{'CategoryName' | localizeFilter}}</label>
           <span
               class="helper-text invalid"
               v-if="$v.title.$dirty && !$v.title.required"
           >
-            Please, write name for Categories
+            {{'CategoryWarning' | localizeFilter}}
           </span>
         </div>
 
@@ -30,18 +30,18 @@
               :class="{invalid: ($v.limit.$dirty && !$v.limit.required) &&
               ($v.limit.$dirty && !$v.limit.minValue)}"
           >
-          <label for="limit">Limit</label>
+          <label for="limit">{{'Limit' | localizeFilter}}</label>
           <span
               class="helper-text invalid"
               v-if="($v.limit.$dirty && !$v.limit.required) &&
               ($v.limit.$dirty && !$v.limit.minValue)"
           >
-            Minimal value need to {{$v.limit.$params.minValue.min}}
+            {{'MinimalSumWarning' | localizeFilter}} {{$v.limit.$params.minValue.min}}
           </span>
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Create
+          {{'ButtonCreate' | localizeFilter}}
           <i class="material-icons right">send</i>
         </button>
       </form>
@@ -52,6 +52,7 @@
 <script>
 import M from 'materialize-css';
 import { required, minValue } from 'vuelidate/lib/validators';
+import localizeFilter from '../../filters/localize.filter';
 
 export default {
   name: 'CategoriesCreate',
@@ -84,7 +85,7 @@ export default {
         this.limit = '';
 
         this.$v.$reset();
-        this.$message('This category was created');
+        this.$message(localizeFilter('CategoryCreateSuccess'));
 
         this.$emit('created', category);
       } catch (error) {
@@ -94,7 +95,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>

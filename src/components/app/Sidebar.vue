@@ -14,19 +14,18 @@
 </template>
 
 <script>
+import localizeFilter from '../../filters/localize.filter';
+
 export default {
   props: ['value'],
   data: () => ({
     links: [
-      { title: 'Bills', url: '/', exact: true },
-      { title: 'History', url: '/history' },
-      { title: 'Planning', url: '/planning' },
-      { title: 'New Record', url: '/record' },
-      { title: 'Categories', url: '/categories' },
+      { title: localizeFilter('BillsNavMenu'), url: '/', exact: true },
+      { title: localizeFilter('HistoryNavMenu'), url: '/history' },
+      { title: localizeFilter('PlanningNavMenu'), url: '/planning' },
+      { title: localizeFilter('RecordNavMenu'), url: '/record' },
+      { title: localizeFilter('CategoriesNavMenu'), url: '/categories' },
     ],
   }),
 };
 </script>
-
-<style scoped>
-</style>
